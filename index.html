@@ -858,7 +858,7 @@ deploy:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/spring拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -877,7 +877,7 @@ deploy:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/22/jQuery/" itemprop="url">jQuery总结</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/spring拦截器/" itemprop="url">spring自定义拦截器</a></h1>
         
 
         <div class="post-meta">
@@ -912,8 +912,8 @@ deploy:
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery/" itemprop="url" rel="index">
-                    <span itemprop="name">jQuery</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -950,12 +950,31 @@ deploy:
 
       
         
-          <h2 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h2><p>例1：在页面中选取所有 <code>&lt;p&gt;</code> 元素: <code>$(&quot;p&quot;)</code></p>
-<p>例2：在页面中选取所有 <code>id=&quot;test&quot;</code> 元素:<code>$(&quot;#test&quot;)</code></p>
-<p>例3：在页面中选取所有 <code>class=&quot;test&quot;</code> 元素:<code>$(&quot;.test&quot;)</code></p>
+          <ul>
+<li><p><mark>自定义拦截器需要去实现HandlerInterceptor，并重写它的3个方法</mark></p>
+<pre><code>public class SecurityInterceptor implements HandlerInterceptor {
+
+//业务处理器处理之前被调用，被拦截返回false，接下去的方法不执行，反之能正常到Controller层
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        return false;
+        }
+    return true;
+}
+
+//在业务处理完成请求后，在DispatcherServlet向客户端返回响应前被调用 
+public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    System.out.println(&quot;进行中&quot;);
+   }
+
+//在DispatcherServlet完全处理完请求后被调用(可以在该方法进行一些资源的清理操作)
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    System.out.println(&quot;结束&quot;);
+    }
+}
+</code></pre></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/jQuery/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/spring拦截器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1152,6 +1171,154 @@ deploy:
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/02/22/jQuery/" itemprop="url">jQuery总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T21:03:59+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h2><p>例1：在页面中选取所有 <code>&lt;p&gt;</code> 元素: <code>$(&quot;p&quot;)</code></p>
+<p>例2：在页面中选取所有 <code>id=&quot;test&quot;</code> 元素:<code>$(&quot;#test&quot;)</code></p>
+<p>例3：在页面中选取所有 <code>class=&quot;test&quot;</code> 元素:<code>$(&quot;.test&quot;)</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/blog/2018/02/22/jQuery/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/springaop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1263,173 +1430,6 @@ public class AopConfig {
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/blog/2018/02/22/springaop/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/spring拦截器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Keeep">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar_back.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="俞塘">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/02/22/spring拦截器/" itemprop="url">spring自定义拦截器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T21:03:59+08:00">
-                2018-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li><p><mark>自定义拦截器需要去实现HandlerInterceptor，并重写它的3个方法</mark></p>
-<pre><code>public class SecurityInterceptor implements HandlerInterceptor {
-
-//业务处理器处理之前被调用，被拦截返回false，接下去的方法不执行，反之能正常到Controller层
-public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return false;
-        }
-    return true;
-}
-
-//在业务处理完成请求后，在DispatcherServlet向客户端返回响应前被调用 
-public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    System.out.println(&quot;进行中&quot;);
-   }
-
-//在DispatcherServlet完全处理完请求后被调用(可以在该方法进行一些资源的清理操作)
-public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-    System.out.println(&quot;结束&quot;);
-    }
-}
-</code></pre></li></ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/spring拦截器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
