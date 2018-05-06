@@ -242,6 +242,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/05/06/将hexo部署到github/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/05/06/将hexo部署到github/" itemprop="url">将hexo部署到github</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T14:09:55+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>首先我们在github上新建一个项目仓库，必须取名为<code>username.github.io</code></li>
+<li><p>在hexo项目的根目录下的_config.yml中需要更改配置</p>
+<pre><code>//需要注意的是这些冒号后面都需要跟上空格
+deploy: 
+  #我们是使用 git 来部署的。
+  type: git
+  # git 仓库的地址。
+  repo: &lt;仓库地址&gt;
+  # 分支名称。
+  branch: master
+</code></pre></li>
+<li>上传项目至github</li>
+<li>执行命令<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code><br><img src="/blog/2018/05/06/将hexo部署到github/成果图.png" alt="成果图"></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/05/05/使用git将本地项目上传到Coding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,7 +836,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/springaop/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/spring拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -721,7 +855,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/22/springaop/" itemprop="url">springaop总结</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/spring拦截器/" itemprop="url">spring自定义拦截器</a></h1>
         
 
         <div class="post-meta">
@@ -794,171 +928,31 @@
 
       
         
-          <ol>
-<li><p>springaop配置（使用javaconfig）</p>
-<pre><code>//使用javaconfig配置
-@Configuration
-//该注解表示使用cglib动态代理
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-//使用该注解可以扫描改类
-@ComponentScan(&quot;com.ssm.Aop&quot;)
-public class AopConfig {
+          <ul>
+<li><p><mark>自定义拦截器需要去实现HandlerInterceptor，并重写它的3个方法</mark></p>
+<pre><code>public class SecurityInterceptor implements HandlerInterceptor {
 
-    @Bean
-    public AopTest getRoleAspect() {
-        return new AopTest();
+//业务处理器处理之前被调用，被拦截返回false，接下去的方法不执行，反之能正常到Controller层
+public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        return false;
+        }
+    return true;
+}
+
+//在业务处理完成请求后，在DispatcherServlet向客户端返回响应前被调用 
+public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    System.out.println(&quot;进行中&quot;);
+   }
+
+//在DispatcherServlet完全处理完请求后被调用(可以在该方法进行一些资源的清理操作)
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    System.out.println(&quot;结束&quot;);
     }
 }
-</code></pre></li></ol>
+</code></pre></li></ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/springaop/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/Spring项目结构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Keeep">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar_back.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="俞塘">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/02/22/Spring项目结构/" itemprop="url">spring的项目结构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T21:03:59+08:00">
-                2018-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="POJO层"><a href="#POJO层" class="headerlink" title="POJO层"></a>POJO层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该层主要是定义简单的javabean，定义其属性和get/set方法<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/Spring项目结构/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/spring拦截器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1157,7 +1151,7 @@ public class AopConfig {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/spring拦截器/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/Spring项目结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -1176,7 +1170,7 @@ public class AopConfig {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/22/spring拦截器/" itemprop="url">spring自定义拦截器</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/Spring项目结构/" itemprop="url">spring的项目结构</a></h1>
         
 
         <div class="post-meta">
@@ -1249,31 +1243,10 @@ public class AopConfig {
 
       
         
-          <ul>
-<li><p><mark>自定义拦截器需要去实现HandlerInterceptor，并重写它的3个方法</mark></p>
-<pre><code>public class SecurityInterceptor implements HandlerInterceptor {
-
-//业务处理器处理之前被调用，被拦截返回false，接下去的方法不执行，反之能正常到Controller层
-public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return false;
-        }
-    return true;
-}
-
-//在业务处理完成请求后，在DispatcherServlet向客户端返回响应前被调用 
-public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    System.out.println(&quot;进行中&quot;);
-   }
-
-//在DispatcherServlet完全处理完请求后被调用(可以在该方法进行一些资源的清理操作)
-public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-    System.out.println(&quot;结束&quot;);
-    }
-}
-</code></pre></li></ul>
+          <h2 id="POJO层"><a href="#POJO层" class="headerlink" title="POJO层"></a>POJO层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该层主要是定义简单的javabean，定义其属性和get/set方法<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/spring拦截器/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/Spring项目结构/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1324,7 +1297,7 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/01/22/阿里云总结/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/springaop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -1343,7 +1316,7 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/01/22/阿里云总结/" itemprop="url">阿里云总结</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/springaop/" itemprop="url">springaop总结</a></h1>
         
 
         <div class="post-meta">
@@ -1355,8 +1328,8 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T21:03:59+08:00">
-                2018-01-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T21:03:59+08:00">
+                2018-02-22
               </time>
             
 
@@ -1378,8 +1351,8 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/阿里云服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">阿里云服务器</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -1416,20 +1389,25 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
 
       
         
-          <h2 id="上传文件到服务端"><a href="#上传文件到服务端" class="headerlink" title="上传文件到服务端"></a>上传文件到服务端</h2><p>linux系统下用 ssh登录管理服务器，并用scp上传下载文件<br>登录ssh方法： </p>
-<ol>
-<li><p>ssh 主机</p>
-<pre><code>ssh 120.78.155.0 （表示用root用户登录到服务器） 
-</code></pre></li>
-<li><p>ssh 用户@主机 </p>
-<pre><code>ssh user1@120.78.155.0  （表示用user1登录到服务器） 
-</code></pre></li>
-<li><p>ssh 主机 -l 用户名 -p 端口 </p>
-<pre><code>ssh120.78.155.0 -l user2 -p 8080 （表示user2用户用8080端口连接到192.168.1.155的服务器） 
+          <ol>
+<li><p>springaop配置（使用javaconfig）</p>
+<pre><code>//使用javaconfig配置
+@Configuration
+//该注解表示使用cglib动态代理
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+//使用该注解可以扫描改类
+@ComponentScan(&quot;com.ssm.Aop&quot;)
+public class AopConfig {
+
+    @Bean
+    public AopTest getRoleAspect() {
+        return new AopTest();
+    }
+}
 </code></pre></li></ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/01/22/阿里云总结/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/springaop/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1626,7 +1604,7 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/01/17/SSM整合错误集/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/01/22/阿里云总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -1645,7 +1623,7 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/01/17/SSM整合错误集/" itemprop="url">SSM错误集</a></h1>
+                <a class="post-title-link" href="/blog/2018/01/22/阿里云总结/" itemprop="url">阿里云总结</a></h1>
         
 
         <div class="post-meta">
@@ -1657,8 +1635,8 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-17T21:03:59+08:00">
-                2018-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T21:03:59+08:00">
+                2018-01-22
               </time>
             
 
@@ -1680,8 +1658,8 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SSM项目整合/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM项目整合</span>
+                  <a href="/categories/阿里云服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">阿里云服务器</span>
                   </a>
                 </span>
 
@@ -1718,11 +1696,20 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
 
       
         
-          <h2 id="Spring-mybatis错误：org-mybatis-spring-MyBatisSystemException-nested-exception-is-org-apache-ibatis-binding"><a href="#Spring-mybatis错误：org-mybatis-spring-MyBatisSystemException-nested-exception-is-org-apache-ibatis-binding" class="headerlink" title="Spring+mybatis错误：org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding"></a>Spring+mybatis错误：org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding</h2><pre><code>org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter &apos;username&apos; not found. Available parameters are [1, 0, param1, param2]
-</code></pre><p>经测试应该是忘了使用@Param。当只有一个参数时，Mapper中可以不使用<br></p>
+          <h2 id="上传文件到服务端"><a href="#上传文件到服务端" class="headerlink" title="上传文件到服务端"></a>上传文件到服务端</h2><p>linux系统下用 ssh登录管理服务器，并用scp上传下载文件<br>登录ssh方法： </p>
+<ol>
+<li><p>ssh 主机</p>
+<pre><code>ssh 120.78.155.0 （表示用root用户登录到服务器） 
+</code></pre></li>
+<li><p>ssh 用户@主机 </p>
+<pre><code>ssh user1@120.78.155.0  （表示用user1登录到服务器） 
+</code></pre></li>
+<li><p>ssh 主机 -l 用户名 -p 端口 </p>
+<pre><code>ssh120.78.155.0 -l user2 -p 8080 （表示user2用户用8080端口连接到192.168.1.155的服务器） 
+</code></pre></li></ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/01/17/SSM整合错误集/#more" rel="contents">
+            <a class="btn" href="/blog/2018/01/22/阿里云总结/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1814,7 +1801,7 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
