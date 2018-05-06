@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库准备 表二表二外键user_id对应表一主键id">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis级联">
+<meta property="og:url" content="http://Keeep.coding.me/blog/2017/12/17/mybatis级联/index.html">
+<meta property="og:site_name" content="俞塘">
+<meta property="og:description" content="数据库准备 表二表二外键user_id对应表一主键id">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://keeep.coding.me/blog/2017/12/17/mybatis级联/数据库表1.png">
+<meta property="og:image" content="http://keeep.coding.me/blog/2017/12/17/mybatis级联/数据库表2.png">
+<meta property="og:image" content="http://keeep.coding.me/blog/2017/12/17/mybatis级联/效果.png">
+<meta property="og:updated_time" content="2018-05-05T07:51:33.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis级联">
+<meta name="twitter:description" content="数据库准备 表二表二外键user_id对应表一主键id">
+<meta name="twitter:image" content="http://keeep.coding.me/blog/2017/12/17/mybatis级联/数据库表1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Keeep.coding.me/blog/2017/12/17/mybatis级联/"/>
+
+
+
+
+
+  <title>mybatis级联 | 俞塘</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">俞塘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一片净土</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-dashboard"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2017/12/17/mybatis级联/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mybatis级联</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T21:03:59+08:00">
+                2017-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数据库准备"><a href="#数据库准备" class="headerlink" title="数据库准备"></a>数据库准备</h3><p><img src="/blog/2017/12/17/mybatis级联/数据库表1.png" alt="数据库表"><br><img src="/blog/2017/12/17/mybatis级联/数据库表2.png" alt="数据库表"></p>
+<p><strong>表二表二外键user_id对应表一主键id</strong><br><a id="more"></a></p>
+<h3 id="JSP准备：-运用了JSTL标签库，目的是迭代出role对象的各个属性"><a href="#JSP准备：-运用了JSTL标签库，目的是迭代出role对象的各个属性" class="headerlink" title="JSP准备：  运用了JSTL标签库，目的是迭代出role对象的各个属性"></a>JSP准备：  运用了JSTL标签库，目的是迭代出role对象的各个属性</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;!--使用JSTL core标签库--&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;c:if test=&quot;${empty role}&quot;&gt;
+    &lt;h3&gt;没有相关的元素&lt;/h3&gt;
+&lt;/c:if&gt;
+&lt;c:if test=&quot;${!empty role}&quot;&gt;
+    &lt;table border=&quot;1&quot; align=&quot;center&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;ID&lt;/td&gt;
+            &lt;td&gt;姓名&lt;/td&gt;
+            &lt;td&gt;年龄&lt;/td&gt;
+            &lt;td&gt;入职日期&lt;/td&gt;
+            &lt;td&gt;密码&lt;/td&gt;
+            &lt;td&gt;账号&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;c:forEach items=&quot;${role}&quot; var=&quot;role&quot;&gt;
+            &lt;tr&gt;
+                &lt;td&gt;${role.id}&lt;/td&gt;
+                &lt;td&gt;${role.name}&lt;/td&gt;
+                &lt;td&gt;${role.age}&lt;/td&gt;
+                &lt;td&gt;${role.hiredate.toLocaleString()}&lt;/td&gt;
+                &lt;td&gt;${role.roleLogin.password}&lt;/td&gt;
+                &lt;td&gt;${role.roleLogin.username}&lt;/td&gt;
+                &lt;td&gt;&lt;a href=&quot;/delete/${role.id}&quot;&gt;删除&lt;/a&gt;&lt;/td&gt;
+                &lt;td&gt;&lt;a href=&quot;/update.jsp&quot;&gt;更新&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/c:forEach&gt;
+    &lt;/table&gt;
+&lt;/c:if&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="POJO类准备："><a href="#POJO类准备：" class="headerlink" title="POJO类准备："></a>POJO类准备：</h3><pre><code>public class Role {
+    private Long id;
+    private String name;
+    private Integer age;
+    private RoleLogin roleLogin;
+    private Date hiredate;
+    //省略getter/setter
+}
+public class RoleLogin {
+    private String password;
+    private String username;
+    //省略getter/setter
+}
+</code></pre><blockquote>
+<p>这个时候如果我们需要使用mybatis从中获取password和username 那么则需要使用自定义一个resultMap我们知道在级联中有一对一、一对多、多对多等关系，<mark>association主要是用来解决一对一关系</mark>的那么上面那种情况我们便可以使用association来处理</p>
+</blockquote>
+<ol>
+<li><p>我们需要创建一个接口，为了创建一个方法，通过id(主键)找到对应的RoleLogin对象</p>
+<pre><code>public interface LoginMapper {
+    RoleLogin findRoleLoginByid(Long id);
+}
+</code></pre><p>并创建其对应的Mapper.xml方法</p>
+<pre><code>&lt;mapper namespace=&quot;com.ssm.Dao.LoginMapper&quot;&gt;
+    &lt;select id=&quot;findRoleLoginByid&quot; parameterType=&quot;long&quot; resultType=&quot;com.ssm.pojo.RoleLogin&quot;&gt;
+        SELECT * FROM t_login WHERE user_id = #{id}
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre></li>
+<li><p>我们需要创建一个接口，返回一个role对象(因为返回多个对象，所以此处需用List)</p>
+<pre><code>public interface RoleMapper {
+    List&lt;Role&gt; getAllmsg();
+}
+</code></pre><p>并创建其对应的Mapper.xml方法</p>
+<pre><code>&lt;mapper namespace=&quot;com.ssm.Dao.RoleMapper&quot;&gt;
+    &lt;resultMap id=&quot;roleResultMapper&quot; type=&quot;com.ssm.pojo.Role&quot;&gt;
+        &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;
+        &lt;association property=&quot;roleLogin&quot; column=&quot;id&quot; select=&quot;com.ssm.Dao.LoginMapper.findRoleLoginByid&quot;/&gt;
+    &lt;/resultMap&gt;
+    &lt;select id=&quot;getAllmsg&quot; resultMap=&quot;roleResultMapper&quot;&gt;
+        SELECT * FROM t_user
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre></li>
+<li><p>我们需要在service层定义一个接口方法</p>
+<pre><code>public interface RoleService {
+    List&lt;Role&gt; getAllmsg();
+}
+</code></pre><p>并写出其实现类</p>
+<pre><code>@Service
+@Transactional
+public class RoleServiceImpl implements RoleService {
+    //注入dao层
+    @Autowired
+    private RoleMapper roleMapper = null;
+
+    public List&lt;Role&gt; getAllmsg() {
+        return roleMapper.getAllmsg();
+    }
+}
+</code></pre></li>
+<li><p>最后写一个controller类</p>
+<pre><code>@Controller
+public class RoleController {
+
+    @Autowired
+    private RoleService roleService = null;
+
+    @RequestMapping(value = &quot;/allmsg&quot;,method = RequestMethod.GET)
+    public ModelAndView allmsg(){
+        List&lt;Role&gt; allmsg = roleService.getAllmsg();
+        ModelAndView mv = new ModelAndView(&quot;AllMsg&quot;);
+        mv.addObject(&quot;role&quot;,allmsg);
+        return mv;
+    }
+}
+</code></pre></li>
+</ol>
+<h2 id="最后效果"><a href="#最后效果" class="headerlink" title="最后效果"></a>最后效果</h2><p><img src="/blog/2017/12/17/mybatis级联/效果.png" alt="效果"></p>
+<h3 id="解读："><a href="#解读：" class="headerlink" title="解读："></a><mark>解读：</mark></h3><blockquote>
+<ul>
+<li>首先我们给resultMap去了一个id  id=”roleResultMapper”，这个id是resultMap的唯一标识符，我们在后面select引用这个resultMap的时候就是通过这个id来引用resultMap=”roleResultMapper，然后还定义了type属性 type=”com.ssm.pojo.Role”，type属性指明了这个resultMap它对应的是哪个JavaBean。 <br></li>
+<li>在resultMap节点中，id表示哪个字段代表这主键 <id column="id" property="id"><br></id></li>
+<li>我们在resultMap中指定了association节点，association节点中的select属性表示要执行的方法，该方法实际上指向了一条SQL语句（SELECT * FROM t_login WHERE user_id = #{id})，column表示给方法传入的参数的字段 ，我们这里要传入省份的id，所以column为id，property表示select查询的结果要赋值给谁，我们这里当然是赋值给Role类的roleLogin属性。<br></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>A cup of tea...</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Keeep 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Keeep 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/12/17/spring配置总结/" rel="next" title="spring总结">
+                <i class="fa fa-chevron-left"></i> spring总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/12/17/Springmvc文件上传和下载/" rel="prev" title="springmvc上传下载文件">
+                springmvc上传下载文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar_back.jpg"
+                alt="Keeep" />
+            
+              <p class="site-author-name" itemprop="name">Keeep</p>
+              <p class="site-description motion-element" itemprop="description">浅浅一池鱼塘也有它的使命</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库准备"><span class="nav-number">1.</span> <span class="nav-text">数据库准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSP准备：-运用了JSTL标签库，目的是迭代出role对象的各个属性"><span class="nav-number">2.</span> <span class="nav-text">JSP准备：  运用了JSTL标签库，目的是迭代出role对象的各个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POJO类准备："><span class="nav-number">3.</span> <span class="nav-text">POJO类准备：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后效果"><span class="nav-number"></span> <span class="nav-text">最后效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解读："><span class="nav-number">1.</span> <span class="nav-text">解读：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keeep</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

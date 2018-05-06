@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="函数日期函数SQL Server  Getdate()：返回当前日期时间,无参数 Dateadd()：返回加上某个数值后的日期时间,参数依次为：单位（day,month等）；数值；日期列   例子： SELECT sname,dateadd(day,1000,sbdate) FROM ustudent  Datediff()：返回第二个日期与第一个日期的差值,参数依次为：单位（day,month等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql知识点汇总">
+<meta property="og:url" content="http://Keeep.coding.me/blog/2017/12/17/SQL/index.html">
+<meta property="og:site_name" content="俞塘">
+<meta property="og:description" content="函数日期函数SQL Server  Getdate()：返回当前日期时间,无参数 Dateadd()：返回加上某个数值后的日期时间,参数依次为：单位（day,month等）；数值；日期列   例子： SELECT sname,dateadd(day,1000,sbdate) FROM ustudent  Datediff()：返回第二个日期与第一个日期的差值,参数依次为：单位（day,month等">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-05T07:01:29.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql知识点汇总">
+<meta name="twitter:description" content="函数日期函数SQL Server  Getdate()：返回当前日期时间,无参数 Dateadd()：返回加上某个数值后的日期时间,参数依次为：单位（day,month等）；数值；日期列   例子： SELECT sname,dateadd(day,1000,sbdate) FROM ustudent  Datediff()：返回第二个日期与第一个日期的差值,参数依次为：单位（day,month等">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Keeep.coding.me/blog/2017/12/17/SQL/"/>
+
+
+
+
+
+  <title>sql知识点汇总 | 俞塘</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">俞塘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一片净土</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-dashboard"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2017/12/17/SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sql知识点汇总</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T21:03:59+08:00">
+                2017-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h3><p><strong>SQL Server</strong></p>
+<ul>
+<li>Getdate()：返回当前日期时间,无参数</li>
+<li><p>Dateadd()：返回加上某个数值后的日期时间,参数依次为：单位（day,month等）；数值；日期列</p>
+<p>  例子：</p>
+<pre><code>SELECT sname,dateadd(day,1000,sbdate) FROM ustudent
+</code></pre></li>
+<li>Datediff()：返回第二个日期与第一个日期的差值,参数依次为：单位（day,month等）；日期1；日期2</li>
+<li>Year()：返回日期的年份,参数为日期</li>
+<li>Month()：返回日期的月份,参数为日期</li>
+<li>Day()：返回日期的天,参数为日期<a id="more"></a>
+</li>
+</ul>
+<p><strong>MySQL</strong></p>
+<ul>
+<li>Now()：返回当前日期时间,无参数</li>
+<li><p>Date_add()：</p>
+<p>  例子：</p>
+<pre><code>SELECT sname,date_add(now(),interval 1000 day) FROM ustudent
+</code></pre></li>
+<li>Datediff(date1,date2)：两个日期相减 date1 - date2，返回天数</li>
+</ul>
+<h3 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h3><ul>
+<li>Left()/ Right() ：对指定值从左/右边开始截取指定个数的字符</li>
+<li>Substring()：对指定值从指定位置开始截取指定个数的字符，注意开始位置是1</li>
+<li>Len()：指定列中除去尾部的空格后的字符数 <mark>SQL Server</mark></li>
+<li>Length() <mark>MySQL</mark></li>
+<li>Lower()/Upper()：大小字母转换</li>
+<li>Rtrim()/Ltrim()：删除指定列中尾部/首部的空格</li>
+<li>Str()：把数值转换成字串。如果不指定转换后的长度，默认为10。</li>
+<li>Concat()：把多个字串连成一个</li>
+</ul>
+<h3 id="数据转换函数"><a href="#数据转换函数" class="headerlink" title="数据转换函数"></a>数据转换函数</h3><p>MySQL 的CAST()和CONVERT()函数可用来获取一个类型的值，并产生另一个类型的值</p>
+<ul>
+<li><p>Convert</p>
+<p>  <mark>MySQL</mark>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<pre><code>SELECT sid,cid,convert(score1*0.33+score2*0.67,decimal(6,2)) FROM uSC
+</code></pre></li>
+<li><p>CAST</p>
+<p>  <mark>MySQL</mark>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<pre><code>SELECT sid,cid,CAST(score1*0.33+score2*0.67 AS decimal(6,2)) FROM uSC
+</code></pre></li>
+</ul>
+<h3 id="运算函数"><a href="#运算函数" class="headerlink" title="运算函数"></a>运算函数</h3><ul>
+<li>统计计行数<ul>
+<li>COUNT（[DISTINCT] *）：计算行数</li>
+<li>COUNT（[DISTINCT] &lt;列名&gt;）：计算指定列上不为NULL的行数</li>
+</ul>
+</li>
+<li>在指定列上计算总和 <strong>SUM（[DISTINCT] &lt;列名&gt;）</strong></li>
+<li>在指定列上计算平均值 <strong>AVG（[DISTINCT] &lt;列名&gt;</strong></li>
+<li>求最大值  <strong>MAX（[DISTINCT] &lt;列名&gt;）</strong></li>
+<li><p>求最小值  <strong>MIN（[DISTINCT] &lt;列名&gt;）</strong></p>
+<p>  <strong><em>统计01班级一周的总课时</em></strong> &nbsp;&nbsp;&nbsp;<mark>SQL Server为Len()</mark></p>
+<pre><code>SELECT SUM(length(timeseg)) FROM ujobtable WHERE gid=&apos;1&apos;
+</code></pre><h2 id="单表查询"><a href="#单表查询" class="headerlink" title="单表查询"></a>单表查询</h2></li>
+<li><p>消除重复的行</p>
+<pre><code>SELECT DISTINCT room,gid FROM uJobTable
+</code></pre></li>
+<li>普通条件表达式<ul>
+<li>关系运算符：=, &gt;, &lt;, &gt;=, &lt;=, != 或 &lt;&gt;</li>
+<li>逻辑运算符：<ul>
+<li>NOT 关系表达式结果取反</li>
+<li>AND 连接两个关系表达式,表示并列条件</li>
+<li>OR   连接两个关系表达式,表示或者条件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>范围运算表达式<ul>
+<li>表达式 BETWEEN …  AND  …  </li>
+<li>表达式  NOT BETWEEN  …  AND  …</li>
+</ul>
+</li>
+<li><p>集合条件表达式</p>
+<ul>
+<li><p>表达式  IN  （&lt;值表&gt;）,表达式 NOT IN （&lt;值表&gt;） <mark>下面两个语句相同</mark></p>
+<ul>
+<li><p>表达式可以单个列,也可以是由列组成的表达式；&lt;值表&gt;可以是一组由逗号分隔的常量或者是<mark>单列</mark>的SELECT语句</p>
+<p><strong><em>查询不及格同学的学号、姓名</em></strong></p>
+<p>  select sid,sname from ustudent where sid in (select sid from usc where score1&lt;60)</p>
+</li>
+<li><p>如果表达式的值包含在&lt;值表&gt;中,则表达式中列值所在的行符合选择条件。</p>
+</li>
+<li><p>IN关系表达式等价于多个OR连接形成的条件表达式</p>
+<p><strong><em>查询01、02和05班学生的姓名和性别</em></strong></p>
+<p>  SELECT Sname,Ssexy FROM uStudent WHERE gid= ‘01’ or gid= ‘02’ or gid= ‘05’</p>
+<p>  SELECT Sname,Ssexy FROM uStudent WHERE gid IN (‘01’,’02’,’05’)</p>
+<p><strong><em>查询计算机科学与技术系同学的学号与姓名</em></strong></p>
+<p>  select sid,sname from ustudent where gid in (select gid from ugrade where did in (select did from udept where dname=’计算机科学与技术系’))</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符串匹配</p>
+<ul>
+<li><p>模糊查找</p>
+<p>  表达式  LIKE  ‘&lt;匹配串&gt;’    或者 表达式 NOT LIKE  ‘&lt;匹配串&gt;’ </p>
+</li>
+<li><p>通配符</p>
+<ul>
+<li><p>% ：代表任意多个（可以为0）字符</p>
+<p>  例：a%b表示以a开头,以b结尾的任意长度的字符串。如acb,addgb,ab 等都满足该匹配串.</p>
+</li>
+<li><p>_ ：代表任意单个字符</p>
+<p>例：a_b表示以a开头,以b结尾的长度为3的任意字符串。如acb,afb等都满足该匹配串</p>
+<p><strong><em>查询所有姓刘学生的姓名、学号和性别</em></strong></p>
+<p>SELECT Sname,sid,Ssex FROM uStudent WHERE Sname LIKE ‘刘%’</p>
+<p><strong><em>查询姓”欧阳”且全名为三个汉字的学生的姓名</em></strong></p>
+<p>SELECT Sname FROM uStudent WHERE Sname LIKE ‘欧阳_’</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>涉及空值的查询</p>
+<ul>
+<li><p>使用谓词 IS NULL 或 IS NOT NULL</p>
+<p>  <strong><em>查所有有成绩的学生学号和课程号</em></strong></p>
+<pre><code>SELECT Sid,Cid FROM  uSC WHERE score IS NOT NULL
+</code></pre></li>
+</ul>
+</li>
+<li><p>对查询结果排序</p>
+<ul>
+<li>使用ORDER BY子句 可以按一个或多个属性列排序<br><mark>升序：ASC,降序：DESC</mark>缺省值为升序</li>
+</ul>
+</li>
+<li><p>使用GROUP BY子句对查询结果分组</p>
+<ul>
+<li>分组的目的<ul>
+<li>未对查询结果分组,集函数将作用于整个查询结果<ul>
+<li>对查询结果分组后,集函数将分别作用于每个组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分组方法 <mark>按指定的一列或多列值分组,值相等的为一组</mark></p>
+<p>  <strong><em>求每个人平均分</em></strong></p>
+<pre><code>SELECT sid,AVG(score1) FROM uSC GROUP BY sid
+</code></pre><p>  <strong><em>求每个班级的人数</em></strong>  <mark>将每一个gid相同的分为一组，计算各自数量</mark></p>
+<pre><code>SELECT gid,COUNT(*) FROM uStudent GROUP BY gid
+</code></pre><p>  <strong><em>求’CS‘系每个班的学生的平均年龄</em></strong> </p>
+<p>  分析：判断学生平均年龄和CS系关系到了2张表，因此需要uStudent和uGrade表，这两张表的联系在于uStudent.gid= uGrade.gid</p>
+<pre><code>SELECT gid, AVG(YEAR(now())-YEAR(sbdate)) FROM uStudent WHERE gid IN (SELECT gid FROM uGrade WHERE did=&apos;CS&apos;) GROUP BY gid
+</code></pre></li>
+</ul>
+</li>
+<li><p>HAVING</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>A cup of tea...</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Keeep 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Keeep 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/12/17/Springmvc文件上传和下载/" rel="next" title="springmvc上传下载文件">
+                <i class="fa fa-chevron-left"></i> springmvc上传下载文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/01/17/SSM整合错误集/" rel="prev" title="SSM错误集">
+                SSM错误集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar_back.jpg"
+                alt="Keeep" />
+            
+              <p class="site-author-name" itemprop="name">Keeep</p>
+              <p class="site-description motion-element" itemprop="description">浅浅一池鱼塘也有它的使命</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期函数"><span class="nav-number">1.1.</span> <span class="nav-text">日期函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符函数"><span class="nav-number">1.2.</span> <span class="nav-text">字符函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据转换函数"><span class="nav-number">1.3.</span> <span class="nav-text">数据转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算函数"><span class="nav-number">1.4.</span> <span class="nav-text">运算函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单表查询"><span class="nav-number">2.</span> <span class="nav-text">单表查询</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keeep</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

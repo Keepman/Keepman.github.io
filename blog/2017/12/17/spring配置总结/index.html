@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="该篇博客主要写了关于Spring的一些基础配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring总结">
+<meta property="og:url" content="http://Keeep.coding.me/blog/2017/12/17/spring配置总结/index.html">
+<meta property="og:site_name" content="俞塘">
+<meta property="og:description" content="该篇博客主要写了关于Spring的一些基础配置">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://keeep.coding.me/blog/2017/12/17/spring配置总结/项目结构图.png">
+<meta property="og:updated_time" content="2018-05-05T08:05:44.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring总结">
+<meta name="twitter:description" content="该篇博客主要写了关于Spring的一些基础配置">
+<meta name="twitter:image" content="http://keeep.coding.me/blog/2017/12/17/spring配置总结/项目结构图.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Keeep.coding.me/blog/2017/12/17/spring配置总结/"/>
+
+
+
+
+
+  <title>spring总结 | 俞塘</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">俞塘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一片净土</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-dashboard"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2017/12/17/spring配置总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-17T21:03:59+08:00">
+                2017-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>该篇博客主要写了关于Spring的一些基础配置<br><a id="more"></a></p>
+<h1 id="spring总结—pom-xml"><a href="#spring总结—pom-xml" class="headerlink" title="spring总结—pom.xml"></a>spring总结—pom.xml</h1><pre><code>&lt;groupId&gt;com.ssm&lt;/groupId&gt;
+&lt;artifactId&gt;SSM&lt;/artifactId&gt;
+&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+            &lt;configuration&gt;
+                &lt;source&gt;1.7&lt;/source&gt;
+                &lt;target&gt;1.7&lt;/target&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+&lt;packaging&gt;war&lt;/packaging&gt;
+&lt;properties&gt;
+    &lt;!-- spring版本号 --&gt;
+    &lt;spring.version&gt;4.3.14.RELEASE&lt;/spring.version&gt;
+    &lt;!-- mybatis版本号 --&gt;
+    &lt;mybatis.version&gt;3.2.8&lt;/mybatis.version&gt;
+    &lt;!-- log4j日志文件管理包版本 --&gt;
+    &lt;slf4j.version&gt;1.6.4&lt;/slf4j.version&gt;
+    &lt;log4j.version&gt;1.2.17&lt;/log4j.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.11&lt;/version&gt;
+        &lt;!-- 表示开发的时候引入，发布的时候不会加载此包 --&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!-- spring核心包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-oxm&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- mybatis核心包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;${mybatis.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- mybatis/spring包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+        &lt;version&gt;1.2.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 导入java ee jar 包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax&lt;/groupId&gt;
+        &lt;artifactId&gt;javaee-api&lt;/artifactId&gt;
+        &lt;version&gt;7.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 导入Mysql数据库链接jar包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.30&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-dbcp&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-dbcp&lt;/artifactId&gt;
+        &lt;version&gt;1.2.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- JSTL标签类 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;jstl&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- 日志文件管理包 --&gt;
+    &lt;!-- log start --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;${log4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+
+    &lt;!-- 格式化对象，方便输出日志 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+        &lt;version&gt;1.1.41&lt;/version&gt;
+    &lt;/dependency&gt;
+
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+        &lt;version&gt;${slf4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+        &lt;version&gt;${slf4j.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- log end --&gt;
+    &lt;!-- 映入JSON --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.codehaus.jackson&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-mapper-asl&lt;/artifactId&gt;
+        &lt;version&gt;1.9.13&lt;/version&gt;
+    &lt;/dependency&gt;
+     &lt;!--上传组件包 --&gt;
+    &lt;!--&lt;dependency&gt;--&gt;
+        &lt;!--&lt;groupId&gt;commons-fileupload&lt;/groupId&gt;--&gt;
+        &lt;!--&lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;--&gt;
+        &lt;!--&lt;version&gt;1.3.1&lt;/version&gt;--&gt;
+    &lt;!--&lt;/dependency&gt;--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-io&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+        &lt;version&gt;2.4&lt;/version&gt;
+    &lt;/dependency&gt;
+
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-codec&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;
+        &lt;version&gt;1.9&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--json包--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+        &lt;version&gt;2.8.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;version&gt;2.8.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;
+        &lt;version&gt;2.8.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!--JSR 303校验--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+        &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+        &lt;version&gt;5.3.0.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.el&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.el-api&lt;/artifactId&gt;
+        &lt;version&gt;3.0.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- spring-aop --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+        &lt;version&gt;4.3.14.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- aspectjweaver --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+        &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+        &lt;version&gt;1.8.10&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+        &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+        &lt;version&gt;1.8.10&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/cglib/cglib-nodep --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;cglib&lt;/groupId&gt;
+        &lt;artifactId&gt;cglib-nodep&lt;/artifactId&gt;
+        &lt;version&gt;2.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;aopalliance&lt;/groupId&gt;
+        &lt;artifactId&gt;aopalliance&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;!-- shiro-core --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+        &lt;artifactId&gt;shiro-core&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+        &lt;artifactId&gt;shiro-spring&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
+        &lt;artifactId&gt;shiro-ehcache&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><h1 id="spring总结—web-xml"><a href="#spring总结—web-xml" class="headerlink" title="spring总结—web.xml"></a>spring总结—web.xml</h1><h2 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h2><p>首先我们提到spring不能错过的便是<mark>DispatcherServlet</mark>，它作为spring的核心帮我们简化了很多操作,下图为在web.xml中DispatcherServlet的配置代码 （包含servlet3.0文件上传）<mark>要注意两处的\<servlet-name>必须名称相同</servlet-name></mark>，并配置该名称的<mark>xxx-servlet.xml</mark></p>
+<pre><code>&lt;servlet&gt;
+&lt;servlet-name&gt;spring&lt;/servlet-name&gt;
+&lt;servlet-class&gt;
+  org.springframework.web.servlet.DispatcherServlet
+&lt;/servlet-class&gt;
+&lt;init-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;WEB-INF/spring-servlet.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;!--基于servlet 3.0的文件上传--&gt;
+  &lt;multipart-config&gt;
+      &lt;location&gt;/Users/mintaoyu/Desktop/springsm&lt;/location&gt;
+      &lt;max-file-size&gt;10485760&lt;/max-file-size&gt;
+      &lt;max-request-size&gt;104857600&lt;/max-request-size&gt;
+      &lt;file-size-threshold&gt;102400&lt;/file-size-threshold&gt;
+  &lt;/multipart-config&gt;
+ &lt;/servlet&gt;
+ &lt;!--拦截请求--&gt;    
+ &lt;servlet-mapping&gt;
+&lt;servlet-name&gt;spring&lt;/servlet-name&gt;
+&lt;!--如果采用*.do则不支持restful风格，采用/则拦截静态页面但支持restful风格
+(可配置&lt;mvc:default-servlet-handler/&gt;)--&gt;
+&lt;url-pattern&gt;/&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+</code></pre><h2 id="SpringEncodingFilter"><a href="#SpringEncodingFilter" class="headerlink" title="SpringEncodingFilter"></a>SpringEncodingFilter</h2><p>这是一个spring自带的字符过滤器，为了保证使用中文的时候不会出现乱码，一般而言将其放在最前端</p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;SpringEncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;encoding&lt;/param-name&gt;
+      &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;forceEncoding&lt;/param-name&gt;
+      &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+           &lt;filter-name&gt;SpringEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+</code></pre><h2 id="ContextLoaderListener"><a href="#ContextLoaderListener" class="headerlink" title="ContextLoaderListener"></a>ContextLoaderListener</h2><p>上下文监听器，作用是自<mark>动装配ApplicationContext的配置信息</mark>第一时间初始化springIOC容器，<mark>如果在web.xml中不写任何参数配置信息，默认的路径是/WEB-INF/applicationContext.xml，在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml</mark></p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+  &lt;/listener&gt;
+</code></pre><h1 id="spring总结—applicationContext-xml"><a href="#spring总结—applicationContext-xml" class="headerlink" title="spring总结—applicationContext.xml"></a>spring总结—applicationContext.xml</h1><pre><code>&lt;context:component-scan base-package=&quot;com.ssm&quot;/&gt;
+&lt;!-- 使用注解驱动 --&gt;
+&lt;context:annotation-config/&gt;
+&lt;!-- 数据库连接池 --&gt;
+&lt;!--引入jdbc.properties文件--&gt;
+&lt;context:property-placeholder location=&quot;/WEB-INF/jdbc.properties&quot;/&gt;
+&lt;!--?useUnicode=true&amp;amp;characterEncoding=utf8  写入之后就可以查询中文了 在xml中配置的话要添加amp; 引入jdbc方法的话不用添加 --&gt;
+&lt;!--配置数据源--&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;${driverClassName}&quot;/&gt;
+    &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+    &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+    &lt;property name=&quot;maxActive&quot; value=&quot;${maxActive}&quot;/&gt;
+    &lt;property name=&quot;maxIdle&quot; value=&quot;${maxIdle}&quot;/&gt;
+    &lt;property name=&quot;maxWait&quot; value=&quot;${maxWait}&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 集成mybatis --&gt;
+&lt;bean id=&quot;SqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;!--引入数据源--&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+    &lt;!--引入mybatis配置文件--&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:/mybatis-config.xml&quot;/&gt;
+    &lt;!--自动扫描mapper文件--&gt;
+    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:/mapper/*&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置数据源事务管理器 --&gt;
+&lt;bean id=&quot;transactionManager&quot;
+      class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+&lt;/bean&gt;
+&lt;!--支持事务注解--&gt;
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+
+&lt;!--将映射接口直接转化为spring容器中的bean--&gt;
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+    &lt;!--将dao层的接口全部转化为bean--&gt;
+    &lt;property name=&quot;basePackage&quot; value=&quot;com.ssm.Dao&quot;/&gt;
+    &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;SqlSessionFactory&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h1 id="spring总结—spring-servlet-xml"><a href="#spring总结—spring-servlet-xml" class="headerlink" title="spring总结—spring-servlet.xml"></a>spring总结—spring-servlet.xml</h1><pre><code>&lt;!-- 使用注解驱动 --&gt;
+&lt;!--系统初始化Springmvc系统默认的适配器，映射器--&gt;
+&lt;mvc:annotation-driven/&gt;
+&lt;!-- 定义扫描装载的包 --&gt;
+&lt;context:component-scan base-package=&quot;com.ssm&quot;/&gt;
+&lt;!--①处理静态资源文件请求   最常采用--&gt;
+&lt;mvc:default-servlet-handler/&gt;
+&lt;!--②资源映射(用这个方法也可以访问静态页面  高级)--&gt;
+&lt;!--&lt;mvc:resources mapping=&quot;/**&quot; location=&quot;/WEB-INF/static/&quot;/&gt;--&gt;
+&lt;!-- 定义视图解析器 --&gt;
+&lt;!-- 找到Web工程/WEB-INF/JSP文件夹，且文件结尾为jsp的文件作为映射 --&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt; &lt;!--前缀--&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt; &lt;!--后缀--&gt;
+&lt;/bean&gt;
+
+   &lt;!--开发登陆拦截器  如不需要该功能可以不配置--&gt;
+&lt;mvc:interceptors&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--对哪些资源做拦截--&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;!--排除不需要被拦截的资源--&gt;
+        &lt;mvc:exclude-mapping path=&quot;/login&quot;/&gt;
+        &lt;mvc:exclude-mapping path=&quot;/registered&quot;/&gt;
+        &lt;bean class=&quot;com.ssm.Interceptor.SecurityInterceptor&quot;/&gt;
+    &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre><h2 id="最后是项目结构图"><a href="#最后是项目结构图" class="headerlink" title="最后是项目结构图"></a>最后是项目结构图</h2><p><img src="/blog/2017/12/17/spring配置总结/项目结构图.png" alt="项目结构图"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>A cup of tea...</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Keeep 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Keeep 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/12/17/mybatis级联/" rel="prev" title="mybatis级联">
+                mybatis级联 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar_back.jpg"
+                alt="Keeep" />
+            
+              <p class="site-author-name" itemprop="name">Keeep</p>
+              <p class="site-description motion-element" itemprop="description">浅浅一池鱼塘也有它的使命</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring总结—pom-xml"><span class="nav-number">1.</span> <span class="nav-text">spring总结—pom.xml</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring总结—web-xml"><span class="nav-number">2.</span> <span class="nav-text">spring总结—web.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DispatcherServlet"><span class="nav-number">2.1.</span> <span class="nav-text">DispatcherServlet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringEncodingFilter"><span class="nav-number">2.2.</span> <span class="nav-text">SpringEncodingFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContextLoaderListener"><span class="nav-number">2.3.</span> <span class="nav-text">ContextLoaderListener</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring总结—applicationContext-xml"><span class="nav-number">3.</span> <span class="nav-text">spring总结—applicationContext.xml</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring总结—spring-servlet-xml"><span class="nav-number">4.</span> <span class="nav-text">spring总结—spring-servlet.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最后是项目结构图"><span class="nav-number">4.1.</span> <span class="nav-text">最后是项目结构图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keeep</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

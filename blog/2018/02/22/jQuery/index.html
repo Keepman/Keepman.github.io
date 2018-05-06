@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="jQuery 选择器例1：在页面中选取所有 &amp;lt;p&amp;gt; 元素: $(&amp;quot;p&amp;quot;) 例2：在页面中选取所有 id=&amp;quot;test&amp;quot; 元素:$(&amp;quot;#test&amp;quot;) 例3：在页面中选取所有 class=&amp;quot;test&amp;quot; 元素:$(&amp;quot;.test&amp;quot;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery总结">
+<meta property="og:url" content="http://Keeep.coding.me/blog/2018/02/22/jQuery/index.html">
+<meta property="og:site_name" content="俞塘">
+<meta property="og:description" content="jQuery 选择器例1：在页面中选取所有 &amp;lt;p&amp;gt; 元素: $(&amp;quot;p&amp;quot;) 例2：在页面中选取所有 id=&amp;quot;test&amp;quot; 元素:$(&amp;quot;#test&amp;quot;) 例3：在页面中选取所有 class=&amp;quot;test&amp;quot; 元素:$(&amp;quot;.test&amp;quot;)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://keeep.coding.me/blog/2018/02/22/jQuery/jQuery尺寸图.png">
+<meta property="og:updated_time" content="2018-05-05T07:46:32.691Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery总结">
+<meta name="twitter:description" content="jQuery 选择器例1：在页面中选取所有 &amp;lt;p&amp;gt; 元素: $(&amp;quot;p&amp;quot;) 例2：在页面中选取所有 id=&amp;quot;test&amp;quot; 元素:$(&amp;quot;#test&amp;quot;) 例3：在页面中选取所有 class=&amp;quot;test&amp;quot; 元素:$(&amp;quot;.test&amp;quot;)">
+<meta name="twitter:image" content="http://keeep.coding.me/blog/2018/02/22/jQuery/jQuery尺寸图.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/"/>
+
+
+
+
+
+  <title>jQuery总结 | 俞塘</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">俞塘</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一片净土</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-dashboard"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Keeep">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar_back.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="俞塘">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jQuery总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T21:03:59+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h2><p>例1：在页面中选取所有 <code>&lt;p&gt;</code> 元素: <code>$(&quot;p&quot;)</code></p>
+<p>例2：在页面中选取所有 <code>id=&quot;test&quot;</code> 元素:<code>$(&quot;#test&quot;)</code></p>
+<p>例3：在页面中选取所有 <code>class=&quot;test&quot;</code> 元素:<code>$(&quot;.test&quot;)</code></p>
+<a id="more"></a>
+<p><strong><em>关于 : 和 [ ] 这两个符号的理解</em></strong></p>
+<p>：可以理解为种类的意思，如：<code>p:first</code>，p 的种类的第一个。</p>
+<p>[ ] 很自然的可以理解为属性的意思，如：[href] 选取带有 href 属性的元素 </p>
+<ul>
+<li>$(“*”)    选取所有元素    </li>
+<li>$(this)    选取当前 HTML 元素    </li>
+<li>$(“p.intro”)    选取 class 为 intro 的 <code>&lt;p&gt;</code> 元素</li>
+<li>$(“p#intro”)    选取 id 为 intro 的 <code>&lt;p&gt;</code> 元素</li>
+<li>$(“p:first”)    选取第一个 <code>&lt;p&gt;</code> 元素    </li>
+<li>$(“ul li:first”)    选取第一个 <code>&lt;ul&gt;</code> 元素的第一个 <code>&lt;li&gt;</code> 元素</li>
+<li>$(“ul li:first-child”)    选取每个 <code>&lt;ul&gt;</code> 元素的第一个 <code>&lt;li&gt;</code> 元素</li>
+<li>$(“[href]”)    选取带有 href 属性的元素    </li>
+<li>$(“a[target=’_blank’]”)    选取所有 target 属性值等于 “_blank” 的 <code>&lt;a&gt;</code> 元素</li>
+<li>$(“a[target!=’_blank’]”)    选取所有 target 属性值不等于 “_blank” 的 <code>&lt;a&gt;</code> 元素</li>
+<li>$(“:button”)    选取所有 type=”button” 的 <code>&lt;input&gt;</code> 元素 和 <code>&lt;button&gt;</code> 元素</li>
+<li>$(“tr:even”)    选取偶数位置的 <code>&lt;tr&gt;</code> 元素    </li>
+<li>$(“tr:odd”)    选取奇数位置的 <code>&lt;tr&gt;</code> 元素</li>
+</ul>
+<h2 id="jQuery-事件"><a href="#jQuery-事件" class="headerlink" title="jQuery 事件"></a>jQuery 事件</h2><ul>
+<li><p>click （当<strong>单击</strong>元素时，发生 click 事件）</p>
+<pre><code>$(function () {
+        &lt;!--单击元素button时触发click事件--&gt;
+        $(&quot;button&quot;).click(function () {
+            //事件执行代码
+        });
+});
+</code></pre></li>
+<li>dblclick（当<strong>双击</strong>元素时，触发 dblclick 事件）</li>
+<li>mouseenter（当鼠标指针穿过（进入）被选<strong>元素</strong>时，会发生 mouseenter 事件）</li>
+<li><p>mouseleave（当鼠标离开被选元素时，会发生 mouseleave 事件）</p>
+<pre><code>//遇到时背景颜色变红，离开时背景恢复白色
+$(&quot;#color&quot;).mouseenter(function () {
+       $(&quot;#color&quot;).css(&quot;background-color&quot;,&quot;red&quot;)
+   $(&quot;#color&quot;).mouseleave(function () {
+      $(&quot;#color&quot;).css(&quot;background-color&quot;,&quot;white&quot;)
+})
+</code></pre></li>
+<li>mouseover （事件在鼠标移动到选取的<strong>元素及其子元素</strong>上时触发）</li>
+<li>hover（hover方法用于模拟光标悬停事件。当鼠标移动到元素上时，会触发指定的第一个函数(mouseenter);当鼠标移出这个元素时，会触发指定的第二个函数(mouseleave)）</li>
+<li>focus（当元素获得焦点时，发生 focus 事件）</li>
+<li>blur（当元素失去焦点时，发生 blur 事件）</li>
+<li><p>keypress （在键盘上按下一个按键，并产生一个字符时发生, 返回ASCII码。<strong>注意: shift、alt、ctrl等键按下并不会产生字符</strong>，所以监听无效 ,换句话说, 只有按下能在屏幕上输出字符的按键时keypress事件才会触发。若一直按着某按键则会不断触发）</p>
+<pre><code>//定义初始值为0，每次在input元素中键盘输入值时，span元素中的值+1
+i=0;
+$(&quot;input&quot;).keypress(function () {
+$(&quot;span&quot;).text(i+=1);
+   });
+</code></pre></li>
+<li>submit（当提交表单时，会发生 submit 事件。该事件只适用于 <code>&lt;form&gt;</code> 元素）</li>
+<li>change （当元素的值改变时发生 change 事件 <strong>仅适用于表单字段</strong>）</li>
+<li><p>resize （当调整浏览器窗口大小时，发生 resize 事件）</p>
+<pre><code>$(window).resize(function () {
+alert(&quot;调整窗口大小成功&quot;)
+ })
+</code></pre></li>
+<li>scroll（当用户<strong>滚动</strong>指定的元素时，会发生 scroll 事件）</li>
+</ul>
+<h2 id="jQuery-效果-隐藏和显示"><a href="#jQuery-效果-隐藏和显示" class="headerlink" title="jQuery 效果- 隐藏和显示"></a>jQuery 效果- 隐藏和显示</h2><ul>
+<li><p>hide() 和 show()</p>
+<pre><code>//点击button，p元素内容隐藏，点击id=t的元素，p元素内容显示
+$(document).ready(function(){
+  $(&quot;button&quot;).click(function(){
+    $(&quot;p&quot;).hide(1000);
+  });
+    $(&quot;#t&quot;).click(function(){
+    $(&quot;p&quot;).show(1000);
+    });
+});
+&lt;body&gt;
+&lt;button&gt;隐藏&lt;/button&gt;
+    &lt;button id=&quot;t&quot;&gt;显示&lt;/button&gt;
+&lt;p&gt;这是个段落，内容比较少。&lt;/p&gt;
+&lt;p&gt;这是另外一个小段落&lt;/p&gt;
+&lt;/body&gt;
+</code></pre><p>  语法<br>  <code>$(selector).hide(speed,callback);`</code>$(selector).show(speed,callback);`</p>
+</li>
+</ul>
+<p>笔记</p>
+<ol>
+<li><p>$(selector)选中的元素的个数为n个，则callback函数会执行n次；</p>
+</li>
+<li><p>callback函数名后加括号，会立刻执行函数体，<strong>只会调用一次</strong>，而不是等到显示/隐藏完成后才执行；</p>
+</li>
+<li><p>callback既可以是函数名，也可以是匿名函数</p>
+</li>
+</ol>
+<p><strong>可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。</strong></p>
+<p><strong>可选的 callback 参数是隐藏或显示完成后所执行的函数名称。</strong></p>
+<ul>
+<li>toggle()<mark>使用 toggle() 方法来切换 hide() 和 show() 方法</mark></li>
+</ul>
+<p>语法<code>$(selector).toggle(speed,callback);</code></p>
+<h2 id="jQuery-效果-淡入淡出"><a href="#jQuery-效果-淡入淡出" class="headerlink" title="jQuery 效果- 淡入淡出"></a>jQuery 效果- 淡入淡出</h2><ul>
+<li>fadeIn() 用于淡入<strong>已隐藏</strong>的元素  display:none</li>
+</ul>
+<p>语法<code>$(selector).fadeIn(speed,callback);</code></p>
+<ul>
+<li>fadeOut() 用于淡出可见元素</li>
+<li><mark>fadeToggle() 可以在 fadeIn() 与 fadeOut() 方法之间进行切换</mark></li>
+<li><p>fadeTo() 允许渐变为给定的不透明度（值介于 0 与 1 之间）</p>
+<p> 语法<code>$(selector).fadeTo(speed,opacity,callback);</code></p>
+<p> fadeTo() 方法中必需的 opacity 参数将淡入淡出效果设置为给定的不透明度（值介于 0 与 1 之间）</p>
+</li>
+</ul>
+<h2 id="jQuery-效果-滑动"><a href="#jQuery-效果-滑动" class="headerlink" title="jQuery 效果 - 滑动"></a>jQuery 效果 - 滑动</h2><ul>
+<li>slideDown() 用于向下滑动元素</li>
+<li>slideUp()  用于向上滑动元素</li>
+<li><mark>slideToggle() 可以在 slideDown() 与 slideUp() 方法之间进行切换</mark></li>
+</ul>
+<h2 id="jQuery-效果-动画"><a href="#jQuery-效果-动画" class="headerlink" title="jQuery 效果- 动画"></a>jQuery 效果- 动画</h2><h3 id="animate"><a href="#animate" class="headerlink" title="animate()"></a>animate()</h3><p>语法<code>$(selector).animate({params},speed,callback);</code></p>
+<p>必需的 params 参数定义形成动画的 CSS 属性。</p>
+<pre><code>//点击按钮，文字向右移动250px，不透明度为0.5
+$(&quot;#动画&quot;).click(function () {
+    $(&quot;#move&quot;).animate({
+    left:&apos;250px&apos;,
+    opacity:&apos;0.5&apos;
+    },1000);
+   //使用相对值（每次在原先的基础上改变）    
+    $(&quot;div&quot;).animate({
+          left:&apos;50px&apos;,
+          height:&apos;+=150px&apos;,
+          width:&apos;+=150px&apos;
+});
+//甚至可以把属性的动画值设置为 &quot;show&quot;、&quot;hide&quot; 或 &quot;toggle&quot;
+    $(&quot;div&quot;).animate({
+      height:&apos;toggle&apos;
+    });
+})
+</code></pre><p> 默认情况下，所有的 HTML 元素有一个静态的位置，且是不可移动的。<br>如果需要改变为，<mark>我们需要将元素的 position 属性设置为 relative, fixed, 或 absolute!</mark><br><strong>当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等。</strong>jQuery 提供针对动画的队列功能，意味着当有多个 animate() 调用时，jQuery 会创建包含这些方法调用的”内部”队列。然后逐一运行这些 animate 调用。</p>
+<p>同时，<mark>色彩动画并不包含在核心 jQuery 库中</mark>,如要色彩改变，需要添加这个插件</p>
+<pre><code>&lt;script
+  src=&quot;http://code.jquery.com/color/jquery.color-2.1.2.js&quot;
+  integrity=&quot;sha256-1Cn7TdfHiMcEbTuku97ZRSGt2b3SvZftEIn68UMgHC8=&quot;
+  crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+</code></pre><h2 id="jQuery-停止动画"><a href="#jQuery-停止动画" class="headerlink" title="jQuery 停止动画"></a>jQuery 停止动画</h2><h3 id="stop"><a href="#stop" class="headerlink" title="stop()"></a>stop()</h3><p>语法<code>$(selector).stop(stopAll,goToEnd);</code></p>
+<p>可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。</p>
+<p>可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。</p>
+<p>因此，默认地，stop() 会清除在被选元素上指定的当前动画。</p>
+<h2 id="jQuery-Callback-方法"><a href="#jQuery-Callback-方法" class="headerlink" title="jQuery Callback 方法"></a>jQuery Callback 方法</h2><p>回调函数</p>
+<pre><code>//上一个事件100%完成后执行,中途中断暂停的不执行回调函数
+ $(&quot;#oh&quot;).click(function () {
+    $(&quot;#change&quot;).toggle(1000,function () {
+        alert(&quot;成功&quot;)
+    })
+})
+</code></pre><h2 id="jQuery-链-Chaining"><a href="#jQuery-链-Chaining" class="headerlink" title="jQuery - 链(Chaining)"></a>jQuery - 链(Chaining)</h2><p>Chaining 允许我们在一条语句中运行多个 jQuery 方法（在相同的元素上）</p>
+<pre><code>//&quot;p1&quot; 元素首先会变为红色，然后向上滑动，再然后向下滑动
+$(&quot;button&quot;).click(function(){
+$(&quot;#p1&quot;).css(&quot;color&quot;,&quot;red&quot;).slideUp(2000).slideDown(2000);
+</code></pre><h2 id="jQuery-获取-设置内容和属性"><a href="#jQuery-获取-设置内容和属性" class="headerlink" title="jQuery - 获取/设置内容和属性"></a>jQuery - 获取/设置内容和属性</h2><p>获得内容 - text()、html() 以及 val()</p>
+<p>设置内容 - text(“Hello world!”)、html(<code>&lt;mark&gt;Hello world!&lt;/mark&gt;</code>) 以及 val()</p>
+<p><strong>这里注意html与text设置内容的区别是：html</strong></p>
+<ul>
+<li>text() - 设置或返回所选元素的文本内容</li>
+<li>html() - 设置或返回所选元素的内容（包括 HTML 标记）</li>
+<li><p>val() - 设置或返回表单字段的值</p>
+<pre><code>//需要注意的是如果在一个字符串前加一个加号（+）js会尝试转换字符串为数值类型 如3+4+5=12
+//如果不加则会字符串相加 如3+4+5=345
+$(&quot;#add&quot;).click(function () {
+alert(+$(&quot;#text1&quot;).val()+ +$(&quot;#text2&quot;).val()+ +$(&quot;#text3&quot;).val())
+})
+</code></pre></li>
+</ul>
+<p>获取属性 - attr()</p>
+<pre><code>//用于获取id为runoob对应的href属性值
+$(&quot;button&quot;).click(function(){
+alert($(&quot;#runoob&quot;).attr(&quot;href&quot;));
+  });
+</code></pre><h2 id="jQuery-添加元素"><a href="#jQuery-添加元素" class="headerlink" title="jQuery - 添加元素"></a>jQuery - 添加元素</h2><ul>
+<li>append() - 在被选元素的结尾插入内容</li>
+<li>prepend() - 在被选元素的开头插入内容</li>
+<li>after() - 在被选元素之后插入内容</li>
+<li>before() - 在被选元素之前插入内容</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li>append/prepend 是在选择元素内部嵌入。<br></li>
+<li>after/before 是在元素外面追加。</li>
+</ul>
+<h2 id="jQuery-删除元素"><a href="#jQuery-删除元素" class="headerlink" title="jQuery - 删除元素"></a>jQuery - 删除元素</h2><ul>
+<li>remove() - 删除被选元素（及其子元素）</li>
+<li>empty() - 从被选元素中删除子元素(比如div不会删除，但里面的<code>&lt;p&gt;</code>会清空)</li>
+</ul>
+<h2 id="jQuery-获取并设置-CSS-类"><a href="#jQuery-获取并设置-CSS-类" class="headerlink" title="jQuery - 获取并设置 CSS 类"></a>jQuery - 获取并设置 CSS 类</h2><ul>
+<li>addClass() - 向被选元素添加一个或多个类,<strong>多个类空格分开</strong></li>
+<li>removeClass() - 从被选元素删除一个或多个类</li>
+<li>toggleClass() - 对被选元素进行添加/删除类的切换操作</li>
+<li><p>css() - 设置或返回样式属性</p>
+<ul>
+<li><p>如需返回指定的 CSS 属性的值，请使用如下语法：<code>css(&quot;propertyname&quot;);</code></p>
+</li>
+<li><p>如需设置指定的 CSS 属性，请使用如下语法：<code>css(&quot;propertyname&quot;,&quot;value&quot;);</code></p>
+</li>
+<li><p>如需设置多个 CSS 属性，请使用如下语法：<code>css({&quot;propertyname&quot;:&quot;value&quot;,&quot;propertyname&quot;:&quot;value&quot;,...});</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="jQuery-尺寸"><a href="#jQuery-尺寸" class="headerlink" title="jQuery 尺寸"></a>jQuery 尺寸</h2><p><img src="/blog/2018/02/22/jQuery/jQuery尺寸图.png" alt="jQuery尺寸"></p>
+<ul>
+<li>width() 方法设置或返回元素的宽度（不包括内边距、边框或外边距）。</li>
+<li>innerWidth() 方法返回元素的宽度（包括内边距）。</li>
+<li>outerWidth() 方法返回元素的宽度（包括内边距和边框）。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>A cup of tea...</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Keeep 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Keeep 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/02/22/springaop/" rel="next" title="springaop总结">
+                <i class="fa fa-chevron-left"></i> springaop总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/02/22/Spring项目结构/" rel="prev" title="spring的项目结构">
+                spring的项目结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar_back.jpg"
+                alt="Keeep" />
+            
+              <p class="site-author-name" itemprop="name">Keeep</p>
+              <p class="site-description motion-element" itemprop="description">浅浅一池鱼塘也有它的使命</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-选择器"><span class="nav-number">1.</span> <span class="nav-text">jQuery 选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-事件"><span class="nav-number">2.</span> <span class="nav-text">jQuery 事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-效果-隐藏和显示"><span class="nav-number">3.</span> <span class="nav-text">jQuery 效果- 隐藏和显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-效果-淡入淡出"><span class="nav-number">4.</span> <span class="nav-text">jQuery 效果- 淡入淡出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-效果-滑动"><span class="nav-number">5.</span> <span class="nav-text">jQuery 效果 - 滑动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-效果-动画"><span class="nav-number">6.</span> <span class="nav-text">jQuery 效果- 动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#animate"><span class="nav-number">6.1.</span> <span class="nav-text">animate()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-停止动画"><span class="nav-number">7.</span> <span class="nav-text">jQuery 停止动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stop"><span class="nav-number">7.1.</span> <span class="nav-text">stop()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-Callback-方法"><span class="nav-number">8.</span> <span class="nav-text">jQuery Callback 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-链-Chaining"><span class="nav-number">9.</span> <span class="nav-text">jQuery - 链(Chaining)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-获取-设置内容和属性"><span class="nav-number">10.</span> <span class="nav-text">jQuery - 获取/设置内容和属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-添加元素"><span class="nav-number">11.</span> <span class="nav-text">jQuery - 添加元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-删除元素"><span class="nav-number">12.</span> <span class="nav-text">jQuery - 删除元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-获取并设置-CSS-类"><span class="nav-number">13.</span> <span class="nav-text">jQuery - 获取并设置 CSS 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-尺寸"><span class="nav-number">14.</span> <span class="nav-text">jQuery 尺寸</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Keeep</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
