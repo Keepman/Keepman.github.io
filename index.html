@@ -858,7 +858,7 @@ deploy:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/springaop/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -877,7 +877,7 @@ deploy:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/22/springaop/" itemprop="url">springaop总结</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/jQuery/" itemprop="url">jQuery总结</a></h1>
         
 
         <div class="post-meta">
@@ -912,8 +912,8 @@ deploy:
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/jQuery/" itemprop="url" rel="index">
+                    <span itemprop="name">jQuery</span>
                   </a>
                 </span>
 
@@ -950,25 +950,12 @@ deploy:
 
       
         
-          <ol>
-<li><p>springaop配置（使用javaconfig）</p>
-<pre><code>//使用javaconfig配置
-@Configuration
-//该注解表示使用cglib动态代理
-@EnableAspectJAutoProxy(proxyTargetClass = true)
-//使用该注解可以扫描改类
-@ComponentScan(&quot;com.ssm.Aop&quot;)
-public class AopConfig {
-
-    @Bean
-    public AopTest getRoleAspect() {
-        return new AopTest();
-    }
-}
-</code></pre></li></ol>
+          <h2 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h2><p>例1：在页面中选取所有 <code>&lt;p&gt;</code> 元素: <code>$(&quot;p&quot;)</code></p>
+<p>例2：在页面中选取所有 <code>id=&quot;test&quot;</code> 元素:<code>$(&quot;#test&quot;)</code></p>
+<p>例3：在页面中选取所有 <code>class=&quot;test&quot;</code> 元素:<code>$(&quot;.test&quot;)</code></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/springaop/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/jQuery/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1165,7 +1152,7 @@ public class AopConfig {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/jQuery/">
+    <link itemprop="mainEntityOfPage" href="http://Keeep.coding.me/blog/2018/02/22/springaop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Keeep">
@@ -1184,7 +1171,7 @@ public class AopConfig {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/22/jQuery/" itemprop="url">jQuery总结</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/22/springaop/" itemprop="url">springaop总结</a></h1>
         
 
         <div class="post-meta">
@@ -1219,8 +1206,8 @@ public class AopConfig {
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery/" itemprop="url" rel="index">
-                    <span itemprop="name">jQuery</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -1257,12 +1244,25 @@ public class AopConfig {
 
       
         
-          <h2 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h2><p>例1：在页面中选取所有 <code>&lt;p&gt;</code> 元素: <code>$(&quot;p&quot;)</code></p>
-<p>例2：在页面中选取所有 <code>id=&quot;test&quot;</code> 元素:<code>$(&quot;#test&quot;)</code></p>
-<p>例3：在页面中选取所有 <code>class=&quot;test&quot;</code> 元素:<code>$(&quot;.test&quot;)</code></p>
+          <ol>
+<li><p>springaop配置（使用javaconfig）</p>
+<pre><code>//使用javaconfig配置
+@Configuration
+//该注解表示使用cglib动态代理
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+//使用该注解可以扫描改类
+@ComponentScan(&quot;com.ssm.Aop&quot;)
+public class AopConfig {
+
+    @Bean
+    public AopTest getRoleAspect() {
+        return new AopTest();
+    }
+}
+</code></pre></li></ol>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/02/22/jQuery/#more" rel="contents">
+            <a class="btn" href="/blog/2018/02/22/springaop/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
